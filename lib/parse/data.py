@@ -13,11 +13,12 @@ from public.log import log
 
 
 class Data(object):
-    def output_result(self, result, tag = 0):
+    def output_result(self, result, tag=0):
         # for i in result:
         #     print i
-        date = time.strftime('%Y-%m-%d-%H-%M-%S',time.localtime(time.time()))
-        if tag == 1 : self.lines_to_file(date, result)
+        date = time.strftime('%Y-%m-%d-%H-%M-%S', time.localtime(time.time()))
+        if tag == 1:
+            self.lines_to_file(date, result)
 
     # writelines 
     def lines_to_file(self, filename, lines):

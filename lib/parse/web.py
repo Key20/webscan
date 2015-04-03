@@ -46,7 +46,7 @@ class WebSite(object):
                 
                 if req.status_code == 403:
                     times += 1
-                    log.output_log("[error] 403 and try to connet %d" %times, True)
+                    log.output_log("[error] 403 and try to connet %d" % times, True)
                     proxy_switch.link_proxy(self.proxy)
                     self.get_page_source_info(url, headers, cookies, times)
                 return None
@@ -58,8 +58,8 @@ class WebSite(object):
     # 获取文本编码
     def get_page_charset(self, page_source):
         try:
-            coding=None
-            data_lines=page_source.split('\n')
+            coding = None
+            data_lines = page_source.split('\n')
     #         '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'
     #         '<meta charset="utf-8">
             regex = re.compile(r'<meta[\S\s]+charset *= *["\']?([a-zA-Z-0-9]+)["\']?', re.IGNORECASE)
@@ -77,7 +77,7 @@ class WebSite(object):
     def get_server_info(self, url):
         server_info = {}
         try:
-            req = requests.get(url, timeout=3)
+            req = requests.get(url, timeout=self.timeout)
             status_code, server_type, web_type = req.status_code, req.headers['server'], req.headers["x-powered-by"]
             server_info.setdefault("status_code", status_code)
             server_info.setdefault("server", server_type)
@@ -94,7 +94,7 @@ class WebSite(object):
     # return : page_size
     def get_page_size(self, url):
         try:
-            req = requests.get(url, timeout=3)
+            req = requests.get(url, timeout=self.timeout)
             # 有时候没有content-length这个键
             page_size = int(req.headers["content-length"]) if "content-length" in req.headers else len(req.content)
             return page_size

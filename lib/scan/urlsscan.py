@@ -83,20 +83,20 @@ class UrlsScan(object):
                     xss_info_list = self.data_parse.format_vul_info(xss.result, insert_info)
                     # 漏洞存数据库
                     vul_db_op.save_vul_info(xss_info_list)
-                else :
+                else:
                     log.output_log("[xss] not found xss")
       
             # sql scan
             if self.scan_mode & 2:
                 log.output_log("[*] test sql inject...")
                 sql = sql_scan.SqlScan(url, self.proxy)
-                if len(sql.result) > 0 : 
+                if len(sql.result) > 0:
                     # # 打印，存文件
                     # parse.output_result(sql.result)
                     sql_info_list = self.data_parse.format_vul_info(sql.result, insert_info)
                     # 漏洞存数据库
                     vul_db_op.save_vul_info(sql_info_list)
-                else :
+                else:
                     log.output_log("[sql] not found inject")
     
             # site dir scan
@@ -105,5 +105,3 @@ class UrlsScan(object):
                 site_dir = site_dir_scan.SiteDirScan(url, self.proxy)
                 if len(site_dir.result) > 0:
                     pass
-                
-

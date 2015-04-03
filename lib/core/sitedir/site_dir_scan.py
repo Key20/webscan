@@ -45,9 +45,12 @@ class SiteDirScan(object):
         self.status_codes = json.load(open(os.path.split(os.path.realpath(__file__))[0] + "\\exts\\status_code.json"))
         self.url = url
         self.proxy = proxy
-        self.headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.71 Safari/537.36"}
+        self.headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+                                      "Chrome/28.0.1500.71 Safari/537.36"}
         
         self.result = []
+
+        self.data_parse = data.Data()
         self.site_dir_go()
 
     def get_payload(self, timeout=1):
@@ -90,7 +93,7 @@ class SiteDirScan(object):
     # return : None
     def site_dir_go(self):
         # get site root dir
-        ret_list = data.get_data_by_regex(self.url, "(http://[\w.:]{0,62})/?")
+        ret_list = self.data_parse.get_data_by_regex(self.url, "(http://[\w.:]{0,62})/?")
         if len(ret_list) == 0:
             return
         site_root = ret_list[0]

@@ -51,7 +51,6 @@ def set_vul_sign(sign, timeout=1):
 
 
 class Thread(threading.Thread):
-    """ """
     def __init__(self, func, args):
         super(Thread, self).__init__()
         self.func = func
@@ -142,6 +141,3 @@ if __name__ == '__main__':
     sql_scan("http://tchjbh.gotoip3.com/news_display.php?id=148")
     pass
 '''
-    
-    
-    

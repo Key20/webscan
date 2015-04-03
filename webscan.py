@@ -27,7 +27,6 @@ def get_args():
 def web_scan():
 
     args = get_args()
-    
 #     -m mode
 #     01: xss scan  eg: -m 1
 #     10: sql inject eg: -m 2
